@@ -10,7 +10,7 @@ my $dom = Mojo::UserAgent->new( max_redirects => 5 )->get( shift )->res->dom;
 my $h
 = $dom->find( join ',', map "article.markdown-body.entry-content h$_", 1..6 );
 
-say '# Table of Contents';
+say '# TABLE OF CONTENTS';
 for ( $h->each ) {
     my ( $indent )= $_->tag =~ /(\d+)/;
     my $url = $_->at('a:first-child')->{href};
