@@ -15,7 +15,9 @@ for ( $h->each ) {
     my ( $indent )= $_->tag =~ /(\d+)/;
     my $url = $_->at('a:first-child')->{href};
     $_->at('a:first-child')->remove;
+    $_->find('a')->map('remove');
     my $content = $_->content =~ s{</?code>}{`}gr;
+    $content =~ s/^\s+|\s+$//g;
 
     say +('    ' x ($indent-1) ) . "- [$content]($url)";
 }
