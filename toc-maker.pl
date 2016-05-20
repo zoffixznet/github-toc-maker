@@ -3,6 +3,7 @@
 use strictures;
 use 5.010;
 use Mojo::UserAgent;
+use IO::Socket::SSL;
 
 @ARGV or die "Usage: $0 URL-to-repo-homepage\n";
 my $dom = Mojo::UserAgent->new( max_redirects => 5 )->get( shift )->res->dom;
