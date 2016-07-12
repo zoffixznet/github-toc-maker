@@ -5,11 +5,11 @@ use 5.010;
 use Mojo::UserAgent;
 use IO::Socket::SSL;
 
-@ARGV or die "Usage: $0 URL-to-repo-homepage\n";
+@ARGV or die "Usage: $0 URL-to-repo-homepage [selector-prefix]\n";
 my $dom = Mojo::UserAgent->new( max_redirects => 5 )->get( shift )->res->dom;
 
-my $h
-= $dom->find( join ',', map "article.markdown-body.entry-content h$_", 1..6 );
+my $selector = shift || 'article.markdown-body.entry-content';
+my $h = $dom->find( join ',', map "$selector h$_", 1..6 );
 
 say '# TABLE OF CONTENTS';
 for ( $h->each ) {
@@ -21,4 +21,3 @@ for ( $h->each ) {
 
     say +('    ' x ($indent-1) ) . "- [$content]($url)";
 }
-
