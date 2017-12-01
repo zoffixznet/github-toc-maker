@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 
-use strictures;
+use strict;
+use warnings;
 use 5.010;
 use Mojo::UserAgent;
 use IO::Socket::SSL;
